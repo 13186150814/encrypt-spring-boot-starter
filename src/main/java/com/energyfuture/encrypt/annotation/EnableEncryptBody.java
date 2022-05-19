@@ -10,7 +10,7 @@ import java.lang.annotation.*;
 
 /**
  * <p>
- * 加解密功能开启类
+ * 加解密Body功能开启类
  * </p>
  *
  * @author Parker

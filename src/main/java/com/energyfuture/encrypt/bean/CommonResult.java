@@ -1,4 +1,4 @@
-package com.energyfuture.encrypt.dto;
+package com.energyfuture.encrypt.bean;
 
 import lombok.Data;
 

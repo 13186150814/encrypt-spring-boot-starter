@@ -1,7 +1,9 @@
 package com.energyfuture.encrypt.properties;
 
+import cn.hutool.core.util.RandomUtil;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 /**
  * <p>
@@ -13,13 +15,14 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @date 2022/5/18 15:28
  */
 @Data
+@Component
 @ConfigurationProperties(prefix = "spring.encrypt")
 public class EncryptProperties {
 
     /**
      * 默认加密秘钥
      */
-    private String key = "2ff02f33-5b4c-4629-b6dc-4782de280933";
+    private String key = RandomUtil.randomString(16);
 
 
 }

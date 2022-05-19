@@ -2,18 +2,20 @@ package com.energyfuture.encrypt.advice;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.ObjectUtil;
-import cn.hutool.json.JSONUtil;
 import com.energyfuture.encrypt.annotation.Encrypt;
-import com.energyfuture.encrypt.dto.CommonResult;
+import com.energyfuture.encrypt.bean.CommonResult;
 import com.energyfuture.encrypt.enums.EncryptMethod;
 import com.energyfuture.encrypt.utils.EncryptionAndDecryptionUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
-import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import java.lang.reflect.Method;
@@ -28,11 +30,12 @@ import java.util.Objects;
  * @version v1.0
  * @date 2022/5/18 15:37
  */
-@ControllerAdvice
+@Slf4j
+@RestControllerAdvice
 public class EncryptResponseBodyAdvice implements ResponseBodyAdvice<CommonResult<Object>> {
 
     @Autowired
-    private EncryptionAndDecryptionUtil encryptionAndDecryptionUtil;
+    private ObjectMapper objectMapper;
 
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
@@ -62,14 +65,20 @@ public class EncryptResponseBodyAdvice implements ResponseBodyAdvice<CommonResul
      * @param data 被加密数据
      * @return 加密后数据
      */
-    private String encryptResponseBody(EncryptMethod method, Object data){
+    private Object encryptResponseBody(EncryptMethod method, Object data){
         if (Objects.isNull(method)) {
-            return null;
+            return data;
         }
-        String s = ObjectUtil.isBasicType(data) ? Convert.toStr(data) : JSONUtil.toJsonStr(data);
+        String s = null;
+        try {
+            s = ObjectUtil.isBasicType(data) ? Convert.toStr(data) : objectMapper.writeValueAsString(data);
+        } catch (JsonProcessingException e) {
+            log.error("返回对象转换异常",e);
+            e.printStackTrace();
+        }
         if (method == EncryptMethod.AES) {
-            return encryptionAndDecryptionUtil.aes.encryptHex(s);
+            return EncryptionAndDecryptionUtil.AES.encryptHex(s);
         }
-        return encryptionAndDecryptionUtil.sm4.encryptHex(s);
+        return EncryptionAndDecryptionUtil.SM4.encryptHex(s);
     }
 }
