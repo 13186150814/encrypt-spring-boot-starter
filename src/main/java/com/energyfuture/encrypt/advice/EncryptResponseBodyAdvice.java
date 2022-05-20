@@ -23,7 +23,8 @@ import java.util.Objects;
 
 /**
  * <p>
- * 加密处理
+ * 响应body加密处理；</br>
+ * 此处直接明确加密的是自定义的全局返回 CommonResult 对象，是因为一般web项目后台全局返回对象基本都是 code、msg、data三个对象，其中 code 和 msg 不涉及到涉密没必要加密，只要加密data就好。
  * </p>
  *
  * @author Parker
@@ -37,11 +38,17 @@ public class EncryptResponseBodyAdvice implements ResponseBodyAdvice<CommonResul
     @Autowired
     private ObjectMapper objectMapper;
 
+    /**
+     * supports：该方法用来判断哪些接口需要处理接口加密，这里的判断逻辑是方法上含有 @Encrypt 注解的接口，就执行beforeBodyWrite方法。
+     */
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
         return returnType.hasMethodAnnotation(Encrypt.class);
     }
 
+    /**
+     * 读取返回的全景统一返回对象（ CommonResult ）并加密data数据，
+     */
     @Override
     public CommonResult<Object> beforeBodyWrite(CommonResult<Object> body, MethodParameter returnType, MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
         Method method = returnType.getMethod();
@@ -71,6 +78,7 @@ public class EncryptResponseBodyAdvice implements ResponseBodyAdvice<CommonResul
         }
         String s = null;
         try {
+            // 检查data是否是基本数据类型，不是基本类型就转json
             s = ObjectUtil.isBasicType(data) ? Convert.toStr(data) : objectMapper.writeValueAsString(data);
         } catch (JsonProcessingException e) {
             log.error("返回对象转换异常",e);
