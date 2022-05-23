@@ -28,7 +28,7 @@ import java.util.Objects;
 /**
  * <p>
  * 响应body加密处理；</br>
- * 此处直接明确加密的是自定义的全局返回 CommonResult 对象，是因为一般web项目后台全局返回对象基本都是 code、msg、data三个对象，其中 code 和 msg 不涉及到涉密没必要加密，只要加密data就好。
+ * 一般web项目后台全局返回对象基本都是 code、msg、data三个对象，其中 code 和 msg 不涉及到涉密没必要加密，只要加密data就好。
  * </p>
  *
  * @author Parker
