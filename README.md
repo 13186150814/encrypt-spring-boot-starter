@@ -40,7 +40,7 @@ Step 2. Add the dependency
 <dependency>
     <groupId>com.github.13186150814</groupId>
     <artifactId>encrypt-spring-boot-starter</artifactId>
-    <version>latest</version>
+    <version>latest-tag</version>
 </dependency>
 
 ```

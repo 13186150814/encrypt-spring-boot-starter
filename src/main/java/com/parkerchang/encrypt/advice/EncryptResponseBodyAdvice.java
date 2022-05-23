@@ -51,7 +51,7 @@ public class EncryptResponseBodyAdvice implements ResponseBodyAdvice<Object> {
     }
 
     /**
-     * 读取返回的全景统一返回对象（ CommonResult ）并加密data数据，
+     * 读取返回对象并加密data数据，如果没有data属性就加密返回对象自身。
      */
     @SneakyThrows
     @Override
