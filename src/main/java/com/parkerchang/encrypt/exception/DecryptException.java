@@ -1,4 +1,4 @@
-package com.energyfuture.encrypt.exception;
+package com.parkerchang.encrypt.exception;
 
 /**
  * <p>

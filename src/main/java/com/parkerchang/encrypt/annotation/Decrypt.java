@@ -1,6 +1,6 @@
-package com.energyfuture.encrypt.annotation;
+package com.parkerchang.encrypt.annotation;
 
-import com.energyfuture.encrypt.enums.EncryptMethod;
+import com.parkerchang.encrypt.enums.EncryptMethod;
 
 import java.lang.annotation.*;
 

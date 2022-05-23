@@ -1,4 +1,4 @@
-package com.energyfuture.encrypt.enums;
+package com.parkerchang.encrypt.enums;
 
 /**
  * <p>

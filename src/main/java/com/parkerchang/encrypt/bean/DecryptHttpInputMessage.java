@@ -1,4 +1,4 @@
-package com.energyfuture.encrypt.bean;
+package com.parkerchang.encrypt.bean;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

@@ -1,11 +1,12 @@
-package com.energyfuture.encrypt.advice;
+package com.parkerchang.encrypt.advice;
 
 import cn.hutool.core.io.IoUtil;
-import com.energyfuture.encrypt.annotation.Decrypt;
-import com.energyfuture.encrypt.bean.DecryptHttpInputMessage;
-import com.energyfuture.encrypt.enums.EncryptMethod;
-import com.energyfuture.encrypt.exception.DecryptException;
-import com.energyfuture.encrypt.utils.EncryptionAndDecryptionUtil;
+import cn.hutool.core.util.StrUtil;
+import com.parkerchang.encrypt.annotation.Decrypt;
+import com.parkerchang.encrypt.bean.DecryptHttpInputMessage;
+import com.parkerchang.encrypt.enums.EncryptMethod;
+import com.parkerchang.encrypt.exception.DecryptException;
+import com.parkerchang.encrypt.utils.EncryptionAndDecryptionUtil;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -44,7 +45,11 @@ public class DecryptRequestBodyAdvice extends RequestBodyAdviceAdapter {
     public HttpInputMessage beforeBodyRead(HttpInputMessage inputMessage, MethodParameter parameter, Type targetType, Class<? extends HttpMessageConverter<?>> converterType) throws IOException {
         String body = IoUtil.read(inputMessage.getBody(), StandardCharsets.UTF_8);
         if (Objects.isNull(body)) {
-            return inputMessage;
+            return new DecryptHttpInputMessage(IoUtil.toStream(null, StandardCharsets.UTF_8), inputMessage.getHeaders());
+        }
+        // 一般需要解密的body参数就直接是个字符串，不会有这些开头的符号，有这个符号开头的基本是未加密的JSON
+        if (StrUtil.startWith(body,'{') || StrUtil.startWith(body,'[')) {
+            return new DecryptHttpInputMessage(IoUtil.toStream(body, StandardCharsets.UTF_8), inputMessage.getHeaders());
         }
         Decrypt decrypt = null;
         // 尝试从方法上面取解密注解

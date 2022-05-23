@@ -1,9 +1,9 @@
-package com.energyfuture.encrypt.utils;
+package com.parkerchang.encrypt.utils;
 
 import cn.hutool.crypto.SmUtil;
 import cn.hutool.crypto.symmetric.SymmetricAlgorithm;
 import cn.hutool.crypto.symmetric.SymmetricCrypto;
-import com.energyfuture.encrypt.properties.EncryptProperties;
+import com.parkerchang.encrypt.properties.EncryptProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package com.energyfuture.encrypt.properties;
+package com.parkerchang.encrypt.properties;
 
 import cn.hutool.core.util.RandomUtil;
 import lombok.Data;
