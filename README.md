@@ -88,7 +88,7 @@ spring:
 
 本文将介绍 encrypt-spring-boot-starter 注解包相关类详解（更多详细描述可点击查看源码注释）
 
-[@EnableEncryptBody](https://github.com/13186150814/encrypt-spring-boot-starter/blob/1.0.0/src/main/java/com/energyfuture/encrypt/annotation/EnableEncryptBody.java)
+[@EnableEncryptBody](https://github.com/13186150814/encrypt-spring-boot-starter/blob/1.0.0/src/main/java/com/parkerchang/encrypt/annotation/EnableEncryptBody.java)
 
 ---
 - 描述：加密解密功能开启注解。
@@ -97,7 +97,7 @@ spring:
 > **配置章节有该注解使用示例**。
 
 
-[@Decrypt](https://github.com/13186150814/encrypt-spring-boot-starter/blob/1.0.0/src/main/java/com/energyfuture/encrypt/annotation/Decrypt.java)
+[@Decrypt](https://github.com/13186150814/encrypt-spring-boot-starter/blob/1.0.0/src/main/java/com/parkerchang/encrypt/annotation/Decrypt.java)
 
 ---
 - 描述：解密注解，标识需要解密的接口方法。
@@ -118,7 +118,7 @@ spring:
 | ----- | ---- | -------- | ----------------- | --------------------- |
 | value | Enum | 否      | EncryptMethod.SM4 | 数据解密方式，默认SM4 |
 
-[@Encrypt](https://github.com/13186150814/encrypt-spring-boot-starter/blob/1.0.0/src/main/java/com/energyfuture/encrypt/annotation/Encrypt.java)
+[@Encrypt](https://github.com/13186150814/encrypt-spring-boot-starter/blob/1.0.0/src/main/java/com/parkerchang/encrypt/annotation/Encrypt.java)
 
 ---
 - 描述：加密注解，标识需要加密的接口方法。
