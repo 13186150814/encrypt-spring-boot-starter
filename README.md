@@ -26,22 +26,22 @@ Maven
 Step 1. Add the JitPack repository to your build file
 
 ```
-	<repositories>
-		<repository>
-		    <id>jitpack.io</id>
-		    <url>https://jitpack.io</url>
-		</repository>
-	</repositories>
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
 
 ```
 Step 2. Add the dependency
 
 ```
-	<dependency>
-        <groupId>com.github.13186150814</groupId>
-        <artifactId>encrypt-spring-boot-starter</artifactId>
-        <version>latest</version>
-    </dependency>
+<dependency>
+    <groupId>com.github.13186150814</groupId>
+    <artifactId>encrypt-spring-boot-starter</artifactId>
+    <version>latest</version>
+</dependency>
 
 ```
 
@@ -88,7 +88,7 @@ spring:
 
 本文将介绍 encrypt-spring-boot-starter 注解包相关类详解（更多详细描述可点击查看源码注释）
 
-[@EnableEncryptBody](https://github.com/13186150814/encrypt-spring-boot-starter/blob/1.0.0/src/main/java/com/parkerchang/encrypt/annotation/EnableEncryptBody.java)
+[@EnableEncryptBody](https://github.com/13186150814/encrypt-spring-boot-starter/tree/master/src/main/java/com/parkerchang/encrypt/annotation/EnableEncryptBody.java)
 
 ---
 - 描述：加密解密功能开启注解。
@@ -97,19 +97,18 @@ spring:
 > **配置章节有该注解使用示例**。
 
 
-[@Decrypt](https://github.com/13186150814/encrypt-spring-boot-starter/blob/1.0.0/src/main/java/com/parkerchang/encrypt/annotation/Decrypt.java)
+[@Decrypt](https://github.com/13186150814/encrypt-spring-boot-starter/tree/master/src/main/java/com/parkerchang/encrypt/annotation/Decrypt.java)
 
 ---
 - 描述：解密注解，标识需要解密的接口方法。
 - 使用位置:需要解密的Controller方法上，或者是方法参数对象上都可以。
 
 ```
-	@PostMapping("decrypt")
-    @Decrypt
-    public CommonResult<UserDTO> decrypt(@RequestBody UserDTO userDTO){
-        return CommonResult.success(userDTO);
-    }
-
+@PostMapping("decrypt")
+@Decrypt
+public CommonResult<UserDTO> decrypt(@RequestBody UserDTO userDTO){
+    return CommonResult.success(userDTO);
+}
 ```
 > 前端调用接口传入的是 UserDTO 对象的加密字符串，给方法加上 @Decrypt 注解后就会自动将传入的加密字符串解析为 UserDTO 对象，方法里面就可以正常使用 UserDTO 对象。
 
@@ -118,22 +117,21 @@ spring:
 | ----- | ---- | -------- | ----------------- | --------------------- |
 | value | Enum | 否      | EncryptMethod.SM4 | 数据解密方式，默认SM4 |
 
-[@Encrypt](https://github.com/13186150814/encrypt-spring-boot-starter/blob/1.0.0/src/main/java/com/parkerchang/encrypt/annotation/Encrypt.java)
+[@Encrypt](https://github.com/13186150814/encrypt-spring-boot-starter/tree/master/src/main/java/com/parkerchang/encrypt/annotation/Encrypt.java)
 
 ---
 - 描述：加密注解，标识需要加密的接口方法。
 - 使用位置:需要加密的Controller方法上。
 
 ```
-	@GetMapping("encrypt")
-    @Encrypt
-    public CommonResult<UserDTO> encrypt(){
-		UserDTO dto = new UserDTO();
-        dto.setId("id");
-        dto.setName("name");
-        return CommonResult.success(UserDTO);
-    }
-
+@GetMapping("encrypt")
+@Encrypt
+public CommonResult<UserDTO> encrypt(){
+    UserDTO dto = new UserDTO();
+    dto.setId("id");
+    dto.setName("name");
+    return CommonResult.success(UserDTO);
+}
 ```
 > 只需要将 @Encrypt 注解加在需要加密的接口上（ @ResponseBody 修饰的接口即返回JSON数据的接口）公共返回对象 CommonResult （ CommonResult 类只是示例，实际使用中替换为自己项目的公共返回对象）中的data数据就会被加密。
 
