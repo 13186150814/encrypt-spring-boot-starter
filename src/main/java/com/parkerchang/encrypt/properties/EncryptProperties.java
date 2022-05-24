@@ -1,6 +1,5 @@
 package com.parkerchang.encrypt.properties;
 
-import cn.hutool.core.util.RandomUtil;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
@@ -20,9 +19,10 @@ import org.springframework.stereotype.Component;
 public class EncryptProperties {
 
     /**
-     * 默认加密秘钥
+     * 秘钥 必须是一串32个字符的16进制字符串（使用16位随机字符串转byte数组会和前端秘钥对不上）;</br>
+     * 不设置默认随机生成
      */
-    private String key = RandomUtil.randomString(16);
+    private String key;
 
 
 }
