@@ -73,10 +73,11 @@ public class Application {
 ```
 spring:
   encrypt:
-    key: 1234567891234567
+    key: 33035f4976800a78fc5187f6f8f4f914
 
 ```
-> 此处是配置加密的秘钥（最少需要16位字符），需要和前端协商保持一致，不配置默认是16位随机数。
+> 此处是配置加密的秘钥（是一串32个字符的16进制字符串），需要和前端协商保持一致，不配置默认生成key并在info日志中打印。
+> 此方法可以生成随机秘钥key：System.out.println(HexUtil.encodeHexStr(KeyUtil.generateKey(SM4.ALGORITHM_NAME).getEncoded()));
 
 
 ### 其他
