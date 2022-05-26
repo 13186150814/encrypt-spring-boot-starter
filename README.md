@@ -6,7 +6,7 @@
 
 &emsp;&emsp; [encrypt-spring-boot-starter](https://github.com/13186150814/encrypt-spring-boot-starter) 框架提供 springboot 后端服务与前端之间 http 请求响应数据的加密传递，目前支持 AES 和国密 SM4 加密解密功能，使用非常方便，只需要在 Controller 方法上加上注解就可以完成接口数据的加密和解密操作。
 
-> 注意：解密只能用于@RequestBody 修饰的的JSON传参方法，加密可以应用于所有的响应JSON数据的接口。
+> ***注意：解密只能用于@RequestBody 修饰的的JSON传参方法，加密可以应用于所有的响应JSON数据的接口。***
 
 ## 安装
 
